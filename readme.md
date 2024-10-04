@@ -19,12 +19,19 @@ Deberá tener instalado en su máquina: java 8 o superior, maven y git. Se asumi
 - Luego simplemente deberán clonar este repositorio
 
 ## Uso
+
 Una vez clonado este repositorio podrá ejecutar el verificador de formato de código Java. Para ello primero deberán incluir todos sus paquetes/clases dentro de /demo/src/main/java y luego digirgirse a la carpeta /demo y ejecutar el siguiente comando:
 
 ```bash
-mvn site
+mvn clean checkstyle:check
 ```
 
 Esto generará un reporte en la carpeta /demo/target/site, el cual podrán abrir en su navegador usando el archivo index.html. O opcionalmente podrán abrir el archivo /demo/target/checkstyle-result.xml para ver los errores en formato XML, en un navegador o en un editor de texto de preferencia.
 
-Este archivo XML va a contener los errores de formato de código Java que no cumplan con las reglas establecidas en el archivo de configuración google-checks.xml, 
+Este archivo XML va a contener los errores de formato de código Java que no cumplan con las reglas establecidas en el archivo de configuración google-checks.xml. Pero opcionalmente podrán generar un resumen utilizando el archivo python que se encuentra en /demo/ y ejecutando el siguiente comando:
+
+```bash
+python .\get-summary.py .\target\checkstyle-result.xml <nombre-del-archivo>
+```
+
+Donde <nombre-del-archivo> es el nombre del archivo que desean generar con el resumen de los errores. Este archivo se generará en la carpeta /demo/target y podrán abrirlo en un editor de texto de preferencia. Como tal va a generar un simple archivo .txt con todos los errores encontrados en el archivo XML, la cantidad de errores que contiene todo el proyecto y la cantidad de errores diferentes. Sin embargo, no mostrará detalle de en que archivos o en que líneas se encuentran los errores. Para ello deberán abrir el archivo XML.
